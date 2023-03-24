@@ -4,19 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37584d7a-2321-4dea-bedc-6895f7b8a677" name="Changes" comment="Add tutorial engine and window manager">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/ILogic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/Model.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/ObjectLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/RenderManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/ShaderManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/utils/Utils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/test/TestGame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/fragment.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/vertex.vert" afterDir="false" />
+    <list default="true" id="37584d7a-2321-4dea-bedc-6895f7b8a677" name="Changes" comment="Added basic rendering, input gathering">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/EngineManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/EngineManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/test/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/test/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/ObjectLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/ObjectLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/RenderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/RenderManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/test/TestGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/test/TestGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679444016740</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added basic rendering, input gathering">
+      <created>1679627371424</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1679627371424</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -157,6 +156,7 @@
     <MESSAGE value="Add README.md" />
     <MESSAGE value="Add file structure" />
     <MESSAGE value="Add tutorial engine and window manager" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add tutorial engine and window manager" />
+    <MESSAGE value="Added basic rendering, input gathering" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added basic rendering, input gathering" />
   </component>
 </project>

@@ -28,9 +28,7 @@ public class TestGame implements ILogic {
                 -0.5f, 0.5f, 0.0f,
                 -0.5f, -0.5f, 0.0f,
                 0.5f, -0.5f, 0.0f,
-                0.5f, -0.5f, 0.0f,
                 0.5f, 0.5f, 0.0f,
-                -0.5f, 0.5f, 0.0f
         };
 
         int[] indices = {

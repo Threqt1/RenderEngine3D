@@ -20,7 +20,7 @@ public class ObjectLoader {
         storeIndicesBuffer(indices);
         storeDataInAttribList(0, 3, vertices);
         unbind();
-        return new Model(id, vertices.length / 3);
+        return new Model(id, indices.length);
     }
 
     private int createVAO() {
