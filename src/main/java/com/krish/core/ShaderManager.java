@@ -1,15 +1,42 @@
 package com.krish.core;
 
+import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL20;
+import org.lwjgl.system.MemoryStack;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ShaderManager {
     private final int programID;
     private int vertexShaderID, fragmentShaderID;
 
+    private final Map<String, Integer> uniforms;
+
     public ShaderManager() throws Exception {
         programID = GL20.glCreateProgram();
         if (programID == 0)
             throw new Exception("Couldn't create shader");
+
+        uniforms = new HashMap<>();
+    }
+
+    public void createUniform(String name) throws Exception {
+        int uniformLocation = GL20.glGetUniformLocation(programID, name);
+        if (uniformLocation < 0) {
+            throw new Exception("Could not find uniform " + name);
+        }
+        uniforms.put(name, uniformLocation);
+    }
+
+    public void setUniform(String name, Matrix4f value) {
+        try(MemoryStack stack = MemoryStack.stackPush()) {
+            GL20.glUniformMatrix4fv(uniforms.get(name), false, value.get(stack.mallocFloat(16)));
+        }
+    }
+
+    public void setUniform(String name, int value) {
+        GL20.glUniform1i(uniforms.get(name), value);
     }
 
     public void createVertexShader(String shaderCode) throws Exception {

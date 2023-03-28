@@ -1,9 +1,11 @@
 #version 400 core
 
-in vec3 color;
+in vec2 inFragTexture;
 
 out vec4 fragColor;
 
+uniform sampler2D texture_manager;
+
 void main() {
-    fragColor = vec4(color, 1.0);
+    fragColor = texture(texture_manager, inFragTexture);
 }
