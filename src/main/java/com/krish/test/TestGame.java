@@ -1,8 +1,10 @@
 package com.krish.test;
 
 import com.krish.core.*;
+import com.krish.core.entities.Model;
+import com.krish.core.entities.Texture;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.opengl.GL11;
+import static org.lwjgl.opengl.GL30.*;
 
 public class TestGame implements ILogic {
     private int direction = 0;
@@ -36,7 +38,15 @@ public class TestGame implements ILogic {
                 3, 1, 2
         };
 
-        this.model = loader.loadModel(vertices, indices);
+        float[] texture = {
+                0.0f, 0.0f,
+                0.0f, 1.0f,
+                1.0f, 1.0f,
+                1.0f, 0.0f
+        };
+
+        this.model = loader.loadModel(vertices, indices, texture);
+        this.model.setTexture(new Texture(loader.loadTexture("textures/grassblock.png")));
     }
 
     @Override
@@ -62,7 +72,7 @@ public class TestGame implements ILogic {
     @Override
     public void render() {
         if (window.isResize()) {
-            GL11.glViewport(0, 0, window.getWidth(), window.getHeight());
+            glViewport(0, 0, window.getWidth(), window.getHeight());
             window.setResize(true);
         }
 
