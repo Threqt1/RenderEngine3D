@@ -5,16 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37584d7a-2321-4dea-bedc-6895f7b8a677" name="Changes" comment="Use indices buffer to render quad">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/entities/Texture.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/Engine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/IGameLogic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/Window.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Mesh.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Model.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Renderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/SceneRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/ShaderManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Uniforms.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Entity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Projection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Scene.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/test/Game.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/scene.frag" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/scene.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/entities/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/ObjectLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/ObjectLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/RenderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/RenderManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/ShaderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/ShaderManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/WindowManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/WindowManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/test/TestGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/test/TestGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/fragment.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/fragment.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/vertex.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/vertex.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/EngineManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/ILogic.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/ObjectLoader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/RenderManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/ShaderManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/WindowManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/entities/Model.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/entities/Texture.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/test/Launcher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/test/TestGame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/fragment.frag" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/vertex.vert" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +50,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="vs-template" />
+        <option value="fs-template" />
         <option value="Class" />
       </list>
     </option>
@@ -67,6 +89,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/Java/Projects/3dengineexample&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
@@ -74,9 +97,9 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.krish.test.Launcher" />
-      <module name="renderengine3d.main" />
+    <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.krish.test.Game" />
+      <module name="renderengine3d.test" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.krish.test.*" />
@@ -89,7 +112,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Launcher" />
+        <item itemvalue="Application.Game" />
       </list>
     </recent_temporary>
   </component>
