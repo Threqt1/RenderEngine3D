@@ -18,30 +18,50 @@ public class Engine {
     private int targetFPS;
     private int targetUPS;
 
+    /**
+     * Make a new Engine
+     * @param windowTitle The title of the window
+     * @param opts The window options
+     * @param gameLogic A class implementing the game logic interface
+     */
     public Engine(String windowTitle, Window.WindowOptions opts, IGameLogic gameLogic) {
+        //Create a new window
         this.window = new Window(windowTitle, opts, () -> {
             resize();
             return null;
         });
+        //Translate opts into properties
         this.targetFPS = opts.fps;
         this.targetUPS = opts.ups;
         this.gameLogic = gameLogic;
+        //Create new renderer
         this.renderer = new Renderer();
+        //Initialize new scene
         this.scene = new Scene(window.getWidth(), window.getHeight());
 
+        //Initialize the game logic
         gameLogic.init(window, scene, renderer);
         this.isRunning = true;
     }
 
+    /**
+     * Start the game engine
+     */
     public void start() {
         isRunning = true;
         run();
     }
 
+    /**
+     * Stop the game engine
+     */
     public void stop() {
         isRunning = false;
     }
 
+    /**
+     * Run the game engine
+     */
     private void run() {
         long lastTime = System.currentTimeMillis();
         float millisecondsPerUpdate = 1000.0f / targetUPS;
@@ -91,11 +111,19 @@ public class Engine {
         cleanup();
     }
 
+    /**
+     * Handle resizing the window
+     */
     private void resize() {
+        //Resize the scene
         scene.resize(window.getWidth(), window.getHeight());
     }
 
+    /**
+     * Cleanup the Engine
+     */
     private void cleanup() {
+        //Cleanup all components of the engine
         gameLogic.cleanup();
         renderer.cleanup();
         scene.cleanup();

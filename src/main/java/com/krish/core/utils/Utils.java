@@ -9,6 +9,11 @@ public class Utils {
 
     }
 
+    /**
+     * Read a file and return its contents
+     * @param filePath The file path (in the resources folder)
+     * @return The file data
+     */
     public static String readFile(String filePath) {
         String str;
         try {

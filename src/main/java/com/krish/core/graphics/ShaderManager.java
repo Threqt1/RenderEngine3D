@@ -9,15 +9,22 @@ import static org.lwjgl.opengl.GL30.*;
 public class ShaderManager {
     private final int programID;
 
+    /**
+     * Create a new shader manager
+     * @param shaderModuleDataList List of raw shader file data
+     */
     public ShaderManager(List<ShaderModuleData> shaderModuleDataList) {
+        //Create a new shader program
         programID = glCreateProgram();
         if (programID == 0) {
             throw new RuntimeException("Could not create Shader");
         }
 
+        //Parse all the shader modules
         List<Integer> shaderModules = new ArrayList<>();
         shaderModuleDataList.forEach(s -> shaderModules.add(createShader(Utils.readFile(s.shaderFile), s.shaderType)));
 
+        //Link all the shader modules to the program
         link(shaderModules);
     }
 
@@ -41,7 +48,12 @@ public class ShaderManager {
 
     public void bind() { glUseProgram(programID); }
 
+    /**
+     * Link all the parsed shader modules to the program
+     * @param shaderModules All the shader modules
+     */
     private void link(List<Integer> shaderModules) {
+        //Link to the program
         glLinkProgram(programID);
         if (glGetProgrami(programID, GL_LINK_STATUS) == 0) {
             throw new RuntimeException("Error linking Shader code: " + glGetProgramInfoLog(programID, 1024));

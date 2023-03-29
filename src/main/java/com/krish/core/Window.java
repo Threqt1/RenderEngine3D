@@ -18,6 +18,12 @@ public class Window {
     private int height;
     private Callable<Void> resizeFunction;
 
+    /**
+     * Create a new Window
+     * @param title The title of the window
+     * @param opts Any options associated with the window
+     * @param resizeFunction The function to handle window resizing
+     */
     public Window(String title, WindowOptions opts, Callable<Void> resizeFunction) {
         //Set error callback
         GLFWErrorCallback.createPrint(System.err).set();
@@ -93,24 +99,46 @@ public class Window {
         height = arrHeight[0];
     }
 
+    /**
+     * Update the window data
+     */
     public void update() {
         glfwSwapBuffers(windowHandle);
     }
 
+    /**
+     * Poll events
+     */
     public void pollEvents() {
         glfwPollEvents();
     }
 
+    /**
+     * Check if a key is pressed
+     * @param key The keycode of the key
+     * @return If the key is pressed or not
+     */
     public boolean isKeyPressed(int key) {
         return glfwGetKey(windowHandle, key) == GLFW_PRESS;
     }
 
+    /**
+     * Handle the key pressed (for closing the window)
+     * @param key
+     * @param action
+     */
     public void handleKeyPressed(int key, int action) {
+        //If escape key is released
         if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) {
             glfwSetWindowShouldClose(windowHandle, true);
         }
     }
 
+    /**
+     * Handle resizing the window
+     * @param newWidth The new width
+     * @param newHeight The new height
+     */
     protected void handleResizing(int newWidth, int newHeight) {
         this.width = newWidth;
         this.height = newHeight;
@@ -122,14 +150,24 @@ public class Window {
         }
     }
 
+    /**
+     * @return If the window should close or not
+     */
     public boolean shouldWindowClose() {
         return glfwWindowShouldClose(windowHandle);
     }
 
+    /**
+     * Cleanup the Window after closing
+     */
     public void cleanup() {
+        //Free any callbacks
         glfwFreeCallbacks(windowHandle);
+        //Destroy the window
         glfwDestroyWindow(windowHandle);
+        //Terminate GLFW
         glfwTerminate();
+        //Free error callback
         GLFWErrorCallback cb = glfwSetErrorCallback(null);
         if (cb != null) {
             cb.free();

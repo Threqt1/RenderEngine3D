@@ -7,11 +7,20 @@ import org.joml.Vector3f;
 public class Entity {
     private final String id;
     private final String modelId;
+    //The matrix representing the model
     private Matrix4f modelMatrix;
+    //The position of the entity
     private Vector3f position;
+    //The rotation of the entity
     private Quaternionf rotation;
+    //The scale of the entity
     private float scale;
 
+    /**
+     * Create a new entity
+     * @param id The ID of the entity
+     * @param modelId The model ID for the entity
+     */
     public Entity(String id, String modelId) {
         this.id = id;
         this.modelId = modelId;
