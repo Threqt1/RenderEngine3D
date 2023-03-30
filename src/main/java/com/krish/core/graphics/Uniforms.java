@@ -8,8 +8,8 @@ import java.util.*;
 import static org.lwjgl.opengl.GL30.*;
 
 public class Uniforms {
-    private int programId;
-    private Map<String, Integer> uniforms;
+    private final int programId;
+    private final Map<String, Integer> uniforms;
 
     /**
      * Create a new Uniforms manager
@@ -33,6 +33,15 @@ public class Uniforms {
 
         //Store it in a map according to its name
         uniforms.put(uniformName, uniformLocation);
+    }
+
+    /**
+     * Set the uniform's value
+     * @param uniformName The uniform name
+     * @param value The value to set
+     */
+    public void setUniform(String uniformName, int value) {
+        glUniform1i(this.uniforms.get(uniformName), value);
     }
 
     /**

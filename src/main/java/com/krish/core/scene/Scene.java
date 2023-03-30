@@ -1,15 +1,15 @@
 package com.krish.core.scene;
 
 import com.krish.core.graphics.Model;
+import com.krish.core.graphics.TextureCache;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Scene {
-    //All the models in the scene
-    private Map<String, Model> modelMap;
-    //The projection matrix
-    private Projection projection;
+    private final Map<String, Model> modelMap;
+    private final Projection projection;
+    private final TextureCache textureCache;
 
     /**
      * Make a Scene
@@ -19,6 +19,7 @@ public class Scene {
     public Scene(int width, int height) {
         modelMap = new HashMap<>();
         projection = new Projection(width, height);
+        textureCache = new TextureCache();
     }
 
     //Add an entity to the scene
@@ -54,6 +55,10 @@ public class Scene {
 
     public Projection getProjection() {
         return projection;
+    }
+
+    public TextureCache getTextureCache() {
+        return textureCache;
     }
 
     /**

@@ -7,16 +7,16 @@ import java.util.*;
 public class Model {
     private final String id;
     private final List<Entity> entitiesList;
-    private final List<Mesh> meshList;
+    private final List<Material> materialList;
 
     /**
      * Create a new model
      * @param id The model's ID
-     * @param meshList The meshes associated with the model
+     * @param materialList The materials associated with the model
      */
-    public Model(String id, List<Mesh> meshList) {
+    public Model(String id, List<Material> materialList) {
         this.id = id;
-        this.meshList = meshList;
+        this.materialList = materialList;
         entitiesList = new ArrayList<>();
     }
 
@@ -24,7 +24,7 @@ public class Model {
      * Cleanup the model
      */
     public void cleanup() {
-        meshList.forEach(Mesh::cleanup);
+        materialList.forEach(Material::cleanup);
     }
 
     public String getId() {
@@ -35,7 +35,7 @@ public class Model {
         return entitiesList;
     }
 
-    public List<Mesh> getMeshList() {
-        return meshList;
+    public List<Material> getMaterialList() {
+        return materialList;
     }
 }
