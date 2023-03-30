@@ -7,14 +7,21 @@ import org.lwjgl.opengl.GL;
 import static org.lwjgl.opengl.GL30.*;
 
 public class Renderer {
-    private SceneRenderer sceneRenderer;
+    private final SceneRenderer sceneRenderer;
 
+    /**
+     * Create a new renderer
+     */
     public Renderer() {
         GL.createCapabilities();
+        //Enable depth testing
         glEnable(GL_DEPTH_TEST);
         this.sceneRenderer = new SceneRenderer();
     }
 
+    /**
+     * Cleanup the renderer
+     */
     public void cleanup() {
         sceneRenderer.cleanup();
     }

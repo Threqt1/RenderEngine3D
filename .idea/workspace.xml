@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37584d7a-2321-4dea-bedc-6895f7b8a677" name="Changes" comment="Use indices buffer to render quad">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/Engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Mesh.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/SceneRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/SceneRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/ShaderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/ShaderManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Uniforms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Uniforms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Projection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Projection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Scene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/utils/Utils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -59,10 +59,14 @@ public class ShaderManager {
             throw new RuntimeException("Error linking Shader code: " + glGetProgramInfoLog(programID, 1024));
         }
 
+        //Detach and delete shaders after linking
         shaderModules.forEach(s -> glDetachShader(programID, s));
         shaderModules.forEach(GL30::glDeleteShader);
     }
 
+    /**
+     * Cleanup the program
+     */
     public void cleanup() {
         unbind();
         if (programID != 0) {
@@ -70,6 +74,9 @@ public class ShaderManager {
         }
     }
 
+    /**
+     * Unbind the program (deselect from OpenGL)
+     */
     public void unbind() {
         glUseProgram(0);
     }
