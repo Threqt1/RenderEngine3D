@@ -16,7 +16,8 @@ import java.util.List;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Game implements IGameLogic {
-    private static final float MOUSE_SENSITIVITY = 0.1f;
+    private static final float MOUSE_SENSITIVITY = .1f;
+    private static final float SCROLL_SENSITIVITY = 2;
     private static final float MOVEMENT_SPEED = 0.005f;
     private Entity cube;
     private float rotation;
@@ -168,6 +169,11 @@ public class Game implements IGameLogic {
         if (mouseInput.isRightButtonPressed()) {
             Vector2f displayVector = mouseInput.getDisplayVector();
             camera.addRotation((float) Math.toRadians(-displayVector.x * MOUSE_SENSITIVITY), (float) Math.toRadians(-displayVector.y * MOUSE_SENSITIVITY));
+        }
+        double scrollWheelMovement = mouseInput.getScrollWheelOffset();
+        if (scrollWheelMovement != 0.0) {
+            if (scrollWheelMovement > 0.0) camera.moveForward(move * SCROLL_SENSITIVITY);
+            else camera.moveBackward(move * SCROLL_SENSITIVITY);
         }
     }
 

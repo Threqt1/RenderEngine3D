@@ -11,6 +11,7 @@ public class MouseInput {
     private boolean leftButtonPressed;
     private final Vector2f previousPosition;
     private boolean rightButtonPressed;
+    private double scrollWheelOffset;
 
     public MouseInput(long windowHandle) {
         previousPosition = new Vector2f(-1, -1);
@@ -25,13 +26,12 @@ public class MouseInput {
             currentPosition.y = (float) ypos;
         });
 
-        glfwSetCursorEnterCallback(windowHandle, (handle, entered) -> {
-            inWindow = entered;
-        });
+        glfwSetCursorEnterCallback(windowHandle, (handle, entered) -> inWindow = entered);
         glfwSetMouseButtonCallback(windowHandle, (handle, button, action, mode) -> {
             leftButtonPressed = button == GLFW_MOUSE_BUTTON_1 && action == GLFW_PRESS;
-            rightButtonPressed = button == GLFW_MOUSE_BUTTON_1 && action == GLFW_PRESS;
+            rightButtonPressed = button == GLFW_MOUSE_BUTTON_2 && action == GLFW_PRESS;
         });
+        glfwSetScrollCallback(windowHandle, (handle, offsetX, offsetY) -> scrollWheelOffset = offsetY);
     }
 
     public void input() {
@@ -66,5 +66,12 @@ public class MouseInput {
 
     public boolean isRightButtonPressed() {
         return rightButtonPressed;
+    }
+
+    //1 if up, -1 if down, 0 if none
+    public double getScrollWheelOffset() {
+        double currentScrollWheel = scrollWheelOffset;
+        scrollWheelOffset = 0;
+        return currentScrollWheel;
     }
 }
