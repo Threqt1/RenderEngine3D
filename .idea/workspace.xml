@@ -5,19 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37584d7a-2321-4dea-bedc-6895f7b8a677" name="Changes" comment="Finish comments">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Material.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Texture.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/TextureCache.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/models/cube/cube.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/models/default/default_texture.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/MouseInput.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Mesh.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/Engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/Window.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/SceneRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/SceneRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Uniforms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Uniforms.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Scene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/test/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/test/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/scene.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/scene.frag" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/scene.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/scene.vert" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,18 +64,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/Projects/Java/Projects/renderengine3d/src/main/resources/models/default",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/Java/Projects/renderengine3d/src/main/resources/models/default&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Projects\Java\Projects\renderengine3d\src\main\resources\models\default" />

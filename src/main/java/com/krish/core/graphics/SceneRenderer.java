@@ -33,6 +33,7 @@ public class SceneRenderer {
         uniforms = new Uniforms(shaderManager.getProgramID());
         uniforms.createUniform("projectionMatrix");
         uniforms.createUniform("modelMatrix");
+        uniforms.createUniform("viewMatrix");
         uniforms.createUniform("textureSampler");
     }
 
@@ -53,6 +54,7 @@ public class SceneRenderer {
 
         //Set the projection matrix uniform
         uniforms.setUniform("projectionMatrix", scene.getProjection().getProjectionMatrix());
+        uniforms.setUniform("viewMatrix", scene.getCamera().getViewMatrix());
 
         //Set texture sampler uniform
         uniforms.setUniform("textureSampler", 0);

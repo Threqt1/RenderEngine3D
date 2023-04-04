@@ -7,8 +7,9 @@ out vec2 outTextureCoordinate;
 
 uniform mat4 projectionMatrix;
 uniform mat4 modelMatrix;
+uniform mat4 viewMatrix;
 
 void main() {
-    gl_Position = projectionMatrix * modelMatrix * vec4(inPosition, 1.0);
+    gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(inPosition, 1.0);
     outTextureCoordinate = textureCoordinate;
 }

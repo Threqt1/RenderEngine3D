@@ -2,22 +2,23 @@ package com.krish.test;
 
 import com.krish.core.Engine;
 import com.krish.core.IGameLogic;
+import com.krish.core.MouseInput;
 import com.krish.core.Window;
 import com.krish.core.graphics.*;
+import com.krish.core.scene.Camera;
 import com.krish.core.scene.Entity;
 import com.krish.core.scene.Scene;
-import org.joml.Vector3f;
-import org.joml.Vector4f;
+import org.joml.Vector2f;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_X;
 
 public class Game implements IGameLogic {
+    private static final float MOUSE_SENSITIVITY = 0.1f;
+    private static final float MOVEMENT_SPEED = 0.005f;
     private Entity cube;
-    private final Vector4f displayIncrement = new Vector4f();
     private float rotation;
 
     public static void main(String[] args) {
@@ -145,34 +146,29 @@ public class Game implements IGameLogic {
 
     @Override
     public void input(Window window, Scene scene, long diffTimeMillis) {
-        displayIncrement.zero();
-        if (window.isKeyPressed(GLFW_KEY_UP)) {
-            displayIncrement.y = 1;
-        } else if (window.isKeyPressed(GLFW_KEY_DOWN)) {
-            displayIncrement.y = -1;
-        }
-        if (window.isKeyPressed(GLFW_KEY_LEFT)) {
-            displayIncrement.x = -1;
-        } else if (window.isKeyPressed(GLFW_KEY_RIGHT)) {
-            displayIncrement.x = 1;
+        float move = diffTimeMillis * MOVEMENT_SPEED;
+        Camera camera = scene.getCamera();
+        if (window.isKeyPressed(GLFW_KEY_W)) {
+            camera.moveForward(move);
+        } else if (window.isKeyPressed(GLFW_KEY_S)) {
+            camera.moveBackward(move);
         }
         if (window.isKeyPressed(GLFW_KEY_A)) {
-            displayIncrement.z = -1;
-        } else if (window.isKeyPressed(GLFW_KEY_Q)) {
-            displayIncrement.z = 1;
+            camera.moveLeft(move);
+        } else if (window.isKeyPressed(GLFW_KEY_D)) {
+            camera.moveRight(move);
         }
-        if (window.isKeyPressed(GLFW_KEY_Z)) {
-            displayIncrement.w = -1;
-        } else if (window.isKeyPressed(GLFW_KEY_X)) {
-            displayIncrement.w = 1;
+        if (window.isKeyPressed(GLFW_KEY_UP)) {
+            camera.moveUp(move);
+        } else if (window.isKeyPressed(GLFW_KEY_DOWN)) {
+            camera.moveDown(move);
         }
 
-        displayIncrement.mul(diffTimeMillis / 1000.0f);
-
-        Vector3f entityPos = this.cube.getPosition();
-        this.cube.setPosition(displayIncrement.x + entityPos.x, displayIncrement.y + entityPos.y, displayIncrement.z + entityPos.z);
-        this.cube.setScale(this.cube.getScale() + displayIncrement.w);
-        this.cube.updateModelMatrix();
+        MouseInput mouseInput = window.getMouseInput();
+        if (mouseInput.isRightButtonPressed()) {
+            Vector2f displayVector = mouseInput.getDisplayVector();
+            camera.addRotation((float) Math.toRadians(-displayVector.x * MOUSE_SENSITIVITY), (float) Math.toRadians(-displayVector.y * MOUSE_SENSITIVITY));
+        }
     }
 
     @Override

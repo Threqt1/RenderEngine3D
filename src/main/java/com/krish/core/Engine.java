@@ -87,6 +87,7 @@ public class Engine {
 
             //Handle inputs
             if (targetFPS <= 0 || deltaFPS >= 1) {
+                window.getMouseInput().input();
                 gameLogic.input(window, scene, diff);
             }
 
