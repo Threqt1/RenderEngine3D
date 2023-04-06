@@ -4,8 +4,15 @@ in vec2 outTextureCoordinate;
 
 out vec4 fragColor;
 
-uniform sampler2D textureSampler;
+struct Material
+{
+    vec4 diffuse;
+};
 
-void main() {
-    fragColor = texture(textureSampler, outTextureCoordinate);
+uniform sampler2D textureSampler;
+uniform Material material;
+
+void main()
+{
+    fragColor = texture(textureSampler, outTextureCoordinate) + material.diffuse;
 }

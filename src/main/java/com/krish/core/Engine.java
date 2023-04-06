@@ -3,6 +3,8 @@ package com.krish.core;
 import com.krish.core.graphics.Renderer;
 import com.krish.core.scene.Scene;
 
+import java.net.URISyntaxException;
+
 /*
 UPS - Updates Per Second
 FPS - Frames Per Second
@@ -12,11 +14,11 @@ public class Engine {
     public static final int TARGET_UPS = 30;
     private final IGameLogic gameLogic;
     private final Window window;
-    private Renderer renderer;
+    private final Renderer renderer;
     private boolean isRunning;
-    private Scene scene;
-    private int targetFPS;
-    private int targetUPS;
+    private final Scene scene;
+    private final int targetFPS;
+    private final int targetUPS;
 
     /**
      * Make a new Engine
@@ -24,7 +26,7 @@ public class Engine {
      * @param opts The window options
      * @param gameLogic A class implementing the game logic interface
      */
-    public Engine(String windowTitle, Window.WindowOptions opts, IGameLogic gameLogic) {
+    public Engine(String windowTitle, Window.WindowOptions opts, IGameLogic gameLogic) throws URISyntaxException {
         //Create a new window
         this.window = new Window(windowTitle, opts, () -> {
             resize();

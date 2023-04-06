@@ -4,14 +4,17 @@ import com.krish.core.Engine;
 import com.krish.core.IGameLogic;
 import com.krish.core.MouseInput;
 import com.krish.core.Window;
-import com.krish.core.graphics.*;
+import com.krish.core.graphics.Model;
+import com.krish.core.graphics.Renderer;
 import com.krish.core.scene.Camera;
 import com.krish.core.scene.Entity;
+import com.krish.core.scene.ModelLoader;
 import com.krish.core.scene.Scene;
 import org.joml.Vector2f;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
+import java.util.Objects;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -22,7 +25,7 @@ public class Game implements IGameLogic {
     private Entity cube;
     private float rotation;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws URISyntaxException {
         Game game = new Game();
         Engine engine = new Engine("Krish Engine", new Window.WindowOptions(), game);
         engine.start();
@@ -34,110 +37,9 @@ public class Game implements IGameLogic {
     }
 
     @Override
-    public void init(Window window, Scene scene, Renderer renderer) {
-        float[] positions = new float[]{
-                // V0
-                -0.5f, 0.5f, 0.5f,
-                // V1
-                -0.5f, -0.5f, 0.5f,
-                // V2
-                0.5f, -0.5f, 0.5f,
-                // V3
-                0.5f, 0.5f, 0.5f,
-                // V4
-                -0.5f, 0.5f, -0.5f,
-                // V5
-                0.5f, 0.5f, -0.5f,
-                // V6
-                -0.5f, -0.5f, -0.5f,
-                // V7
-                0.5f, -0.5f, -0.5f,
-
-                // For text coords in top face
-                // V8: V4 repeated
-                -0.5f, 0.5f, -0.5f,
-                // V9: V5 repeated
-                0.5f, 0.5f, -0.5f,
-                // V10: V0 repeated
-                -0.5f, 0.5f, 0.5f,
-                // V11: V3 repeated
-                0.5f, 0.5f, 0.5f,
-
-                // For text coords in right face
-                // V12: V3 repeated
-                0.5f, 0.5f, 0.5f,
-                // V13: V2 repeated
-                0.5f, -0.5f, 0.5f,
-
-                // For text coords in left face
-                // V14: V0 repeated
-                -0.5f, 0.5f, 0.5f,
-                // V15: V1 repeated
-                -0.5f, -0.5f, 0.5f,
-
-                // For text coords in bottom face
-                // V16: V6 repeated
-                -0.5f, -0.5f, -0.5f,
-                // V17: V7 repeated
-                0.5f, -0.5f, -0.5f,
-                // V18: V1 repeated
-                -0.5f, -0.5f, 0.5f,
-                // V19: V2 repeated
-                0.5f, -0.5f, 0.5f,
-        };
-        float[] textCoords = new float[]{
-                0.0f, 0.0f,
-                0.0f, 0.5f,
-                0.5f, 0.5f,
-                0.5f, 0.0f,
-
-                0.0f, 0.0f,
-                0.5f, 0.0f,
-                0.0f, 0.5f,
-                0.5f, 0.5f,
-
-                // For text coords in top face
-                0.0f, 0.5f,
-                0.5f, 0.5f,
-                0.0f, 1.0f,
-                0.5f, 1.0f,
-
-                // For text coords in right face
-                0.0f, 0.0f,
-                0.0f, 0.5f,
-
-                // For text coords in left face
-                0.5f, 0.0f,
-                0.5f, 0.5f,
-
-                // For text coords in bottom face
-                0.5f, 0.0f,
-                1.0f, 0.0f,
-                0.5f, 0.5f,
-                1.0f, 0.5f,
-        };
-        int[] indices = new int[]{
-                // Front face
-                0, 1, 3, 3, 1, 2,
-                // Top Face
-                8, 10, 11, 9, 8, 11,
-                // Right face
-                12, 13, 7, 5, 12, 7,
-                // Left face
-                14, 15, 6, 4, 14, 6,
-                // Bottom face
-                16, 18, 19, 17, 16, 19,
-                // Back face
-                4, 6, 7, 5, 4, 7,};
-        Texture texture = scene.getTextureCache().createTexture("src/main/resources/models/cube/cube.png");
-        Material material = new Material();
-        material.setTexturePath(texture.getTexturePath());
-        List<Material> materialList = new ArrayList<>();
-        materialList.add(material);
-
-        Mesh mesh = new Mesh(positions, textCoords, indices);
-        material.getMeshList().add(mesh);
-        Model cubeModel = new Model("cube-model", materialList);
+    public void init(Window window, Scene scene, Renderer renderer) throws URISyntaxException {
+        Model cubeModel = ModelLoader.loadModel("cube-model", Paths.get(Objects.requireNonNull(getClass().getResource("/models/cube/cube.obj")).toURI()).toAbsolutePath().toString(),
+                scene.getTextureCache());
         scene.addModel(cubeModel);
 
         cube = new Entity("cube-entity", cubeModel.getId());
