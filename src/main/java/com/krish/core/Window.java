@@ -16,8 +16,8 @@ public class Window {
     private final long windowHandle;
     private int width;
     private int height;
-    private MouseInput mouseInput;
-    private Callable<Void> resizeFunction;
+    private final MouseInput mouseInput;
+    private final Callable<Void> resizeFunction;
 
     /**
      * Create a new Window
@@ -64,8 +64,13 @@ public class Window {
             glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
             //Set width/height to max monitor size
             GLFWVidMode vidMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-            width = vidMode.width();
-            height = vidMode.height();
+            if (vidMode != null) {
+                width = vidMode.width();
+                height = vidMode.height();
+            } else {
+                width = 0;
+                height = 0;
+            }
         }
 
         //Create window
@@ -127,8 +132,8 @@ public class Window {
 
     /**
      * Handle the key pressed (for closing the window)
-     * @param key
-     * @param action
+     * @param key The key to check
+     * @param action The action to check
      */
     public void handleKeyPressed(int key, int action) {
         //If escape key is released
@@ -187,6 +192,10 @@ public class Window {
 
     public MouseInput getMouseInput() {
         return mouseInput;
+    }
+
+    public long getWindowHandle() {
+        return windowHandle;
     }
 
     public static class WindowOptions {

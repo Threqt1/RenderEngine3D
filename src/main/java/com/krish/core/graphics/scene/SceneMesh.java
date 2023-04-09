@@ -1,4 +1,4 @@
-package com.krish.core.graphics;
+package com.krish.core.graphics.scene;
 
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.system.MemoryStack;
@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.lwjgl.opengl.GL30.*;
 
-public class Mesh {
+public class SceneMesh {
     private final int vertices;
     //The vertex array ID
     private final int vaoId;
@@ -24,7 +24,7 @@ public class Mesh {
      * @param textureCoordinates The colors at each vertex
      * @param indices The indices for the triangles
      */
-    public Mesh(float[] positions, float[] textureCoordinates, int[] indices) {
+    public SceneMesh(float[] positions, float[] textureCoordinates, int[] indices) {
         //Allocate a new stack in memory
         try(MemoryStack stack = MemoryStack.stackPush()) {
             this.vertices = indices.length;

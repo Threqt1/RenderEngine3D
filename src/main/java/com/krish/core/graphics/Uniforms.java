@@ -1,6 +1,7 @@
 package com.krish.core.graphics;
 
 import org.joml.Matrix4f;
+import org.joml.Vector2f;
 import org.joml.Vector4f;
 import org.lwjgl.system.MemoryStack;
 
@@ -66,5 +67,9 @@ public class Uniforms {
 
     public void setUniform(String uniformName, Vector4f value) {
         glUniform4f(this.uniforms.get(uniformName), value.x, value.y, value.z, value.w);
+    }
+
+    public void setUniform(String uniformName, Vector2f value) {
+        glUniform2f(this.uniforms.get(uniformName), value.x, value.y);
     }
 }

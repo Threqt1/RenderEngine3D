@@ -1,5 +1,6 @@
-package com.krish.core.graphics;
+package com.krish.core.graphics.scene;
 
+import com.krish.core.graphics.*;
 import com.krish.core.scene.Entity;
 import com.krish.core.scene.Scene;
 
@@ -19,8 +20,8 @@ public class SceneRenderer {
     public SceneRenderer() {
         //Initialize the shader file names and types
         List<ShaderManager.ShaderModuleData> shaderModuleDataList = new ArrayList<>();
-        shaderModuleDataList.add(new ShaderManager.ShaderModuleData("/shaders/scene.vert", GL_VERTEX_SHADER));
-        shaderModuleDataList.add(new ShaderManager.ShaderModuleData("/shaders/scene.frag", GL_FRAGMENT_SHADER));
+        shaderModuleDataList.add(new ShaderManager.ShaderModuleData("/shaders/scene/scene.vert", GL_VERTEX_SHADER));
+        shaderModuleDataList.add(new ShaderManager.ShaderModuleData("/shaders/scene/scene.frag", GL_FRAGMENT_SHADER));
         //Load the shaders
         shaderManager = new ShaderManager(shaderModuleDataList);
         createUniforms();
@@ -75,11 +76,11 @@ public class SceneRenderer {
                 texture.bind();
 
                 //Use texture with all meshes (and entities associated)
-                for (Mesh mesh : material.getMeshList()) {
-                    glBindVertexArray(mesh.getVaoId());
+                for (SceneMesh sceneMesh : material.getMeshList()) {
+                    glBindVertexArray(sceneMesh.getVaoId());
                     for (Entity entity : entities) {
                         uniforms.setUniform("modelMatrix", entity.getModelMatrix());
-                        glDrawElements(GL_TRIANGLES, mesh.getVertices(), GL_UNSIGNED_INT, 0);
+                        glDrawElements(GL_TRIANGLES, sceneMesh.getVertices(), GL_UNSIGNED_INT, 0);
                     }
                 }
             }

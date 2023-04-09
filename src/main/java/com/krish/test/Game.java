@@ -1,10 +1,7 @@
 package com.krish.test;
 
-import com.krish.core.Engine;
-import com.krish.core.IGameLogic;
-import com.krish.core.MouseInput;
-import com.krish.core.Window;
-import com.krish.core.graphics.Model;
+import com.krish.core.*;
+import com.krish.core.graphics.scene.Model;
 import com.krish.core.graphics.Renderer;
 import com.krish.core.scene.Camera;
 import com.krish.core.scene.Entity;
@@ -12,13 +9,16 @@ import com.krish.core.scene.ModelLoader;
 import com.krish.core.scene.Scene;
 import org.joml.Vector2f;
 
+import imgui.*;
+import imgui.flag.ImGuiCond;
+
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.Objects;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-public class Game implements IGameLogic {
+public class Game implements IGameLogic, IGUIInstance {
     private static final float MOUSE_SENSITIVITY = .1f;
     private static final float SCROLL_SENSITIVITY = 2;
     private static final float MOVEMENT_SPEED = 0.005f;
@@ -37,6 +37,27 @@ public class Game implements IGameLogic {
     }
 
     @Override
+    public void drawGUI() {
+        ImGui.newFrame();
+        ImGui.setNextWindowPos(0, 0, ImGuiCond.Always);
+        ImGui.showDemoWindow();
+        ImGui.endFrame();
+        ImGui.render();
+    }
+
+    @Override
+    public boolean isGUIInput(Scene scene, Window window) {
+        ImGuiIO imGuiIO = ImGui.getIO();
+        MouseInput mouseInput = window.getMouseInput();
+        Vector2f mousePos = mouseInput.getCurrentPosition();
+        imGuiIO.setMousePos(mousePos.x, mousePos.y);
+        imGuiIO.setMouseDown(0, mouseInput.isLeftButtonPressed());
+        imGuiIO.setMouseDown(1, mouseInput.isRightButtonPressed());
+
+        return imGuiIO.getWantCaptureMouse() || imGuiIO.getWantCaptureKeyboard();
+    }
+
+    @Override
     public void init(Window window, Scene scene, Renderer renderer) throws URISyntaxException {
         Model cubeModel = ModelLoader.loadModel("cube-model", Paths.get(Objects.requireNonNull(getClass().getResource("/models/cube/cube.obj")).toURI()).toAbsolutePath().toString(),
                 scene.getTextureCache());
@@ -45,6 +66,8 @@ public class Game implements IGameLogic {
         cube = new Entity("cube-entity", cubeModel.getId());
         cube.setPosition(0, 0, -2);
         scene.addEntity(cube);
+
+        scene.setGUIInstance(this);
     }
 
     @Override
@@ -88,4 +111,6 @@ public class Game implements IGameLogic {
         this.cube.setRotation(1, 1, 1, (float) Math.toRadians(rotation));
         this.cube.updateModelMatrix();
     }
+
+
 }

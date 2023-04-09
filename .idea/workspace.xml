@@ -4,18 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37584d7a-2321-4dea-bedc-6895f7b8a677" name="Changes" comment="Added scroll movement, comments tomorrow">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/ModelLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/models/cube/cube.mtl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/models/cube/cube.obj" afterDir="false" />
+    <list default="true" id="37584d7a-2321-4dea-bedc-6895f7b8a677" name="Changes" comment="Added ImGUI (for future GUI)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/IGUIInstance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/gui/GUIMesh.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/gui/GUIRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/gui/gui.frag" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/gui/gui.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/IGameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/IGameLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Material.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/Engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/Material.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/SceneMesh.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/Model.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Renderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/SceneRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/SceneRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/SceneRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/SceneRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Uniforms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Uniforms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/ModelLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/ModelLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Scene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/test/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/test/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/scene.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/scene.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/scene.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/scene/scene.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/scene.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/scene/scene.vert" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,9 +41,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Class" />
         <option value="vs-template" />
         <option value="fs-template" />
-        <option value="Class" />
       </list>
     </option>
   </component>
@@ -65,22 +75,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/Projects/Java/Projects/renderengine3d/src/main/resources/models/cube",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/Java/Projects/renderengine3d/src/main/resources/models/cube&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Projects\Java\Projects\renderengine3d\src\main\resources\models\cube" />
       <recent name="D:\Projects\Java\Projects\renderengine3d\src\main\resources\models\default" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\Java\Projects\renderengine3d\src\main\resources\shaders\scene" />
     </key>
   </component>
   <component name="RunManager">
@@ -168,7 +181,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680645561731</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Loading OBJ file support">
+      <created>1680747133778</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1680747133778</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -190,6 +210,8 @@
     <MESSAGE value="Added basic rendering, input gathering" />
     <MESSAGE value="Finish comments" />
     <MESSAGE value="Added scroll movement, comments tomorrow" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added scroll movement, comments tomorrow" />
+    <MESSAGE value="Loading OBJ file support" />
+    <MESSAGE value="Added ImGUI (for future GUI)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added ImGUI (for future GUI)" />
   </component>
 </project>

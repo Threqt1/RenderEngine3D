@@ -37,7 +37,7 @@ public class Engine {
         this.targetUPS = opts.ups;
         this.gameLogic = gameLogic;
         //Create new renderer
-        this.renderer = new Renderer();
+        this.renderer = new Renderer(window);
         //Initialize new scene
         this.scene = new Scene(window.getWidth(), window.getHeight());
 
@@ -57,6 +57,7 @@ public class Engine {
     /**
      * Stop the game engine
      */
+    @SuppressWarnings("unused")
     public void stop() {
         isRunning = false;
     }
@@ -77,6 +78,7 @@ public class Engine {
 
         //Time of last update
         long lastUpdateTime = lastTime;
+        IGUIInstance iGUIInstance = scene.getGUIInstance();
 
         while (isRunning && !window.shouldWindowClose()) {
             window.pollEvents();
@@ -90,7 +92,9 @@ public class Engine {
             //Handle inputs
             if (targetFPS <= 0 || deltaFPS >= 1) {
                 window.getMouseInput().input();
-                gameLogic.input(window, scene, diff);
+                if (iGUIInstance != null && !iGUIInstance.isGUIInput(scene, window)) {
+                    gameLogic.input(window, scene, diff);
+                }
             }
 
             //Update the game state as many times as needed
@@ -118,8 +122,11 @@ public class Engine {
      * Handle resizing the window
      */
     private void resize() {
+        int width = window.getWidth();
+        int height = window.getHeight();
         //Resize the scene
-        scene.resize(window.getWidth(), window.getHeight());
+        scene.resize(width, height);
+        renderer.resize(width, height);
     }
 
     /**

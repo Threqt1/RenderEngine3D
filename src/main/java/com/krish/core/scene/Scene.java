@@ -1,6 +1,7 @@
 package com.krish.core.scene;
 
-import com.krish.core.graphics.Model;
+import com.krish.core.IGUIInstance;
+import com.krish.core.graphics.scene.Model;
 import com.krish.core.graphics.TextureCache;
 
 import java.util.HashMap;
@@ -11,6 +12,7 @@ public class Scene {
     private final Projection projection;
     private final TextureCache textureCache;
     private final Camera camera;
+    private IGUIInstance GUIInstance;
 
     /**
      * Make a Scene
@@ -78,5 +80,13 @@ public class Scene {
     public void resize(int width, int height) {
         //Update the projection matrix
         projection.updateProjectionMatrix(width, height);
+    }
+
+    public IGUIInstance getGUIInstance() {
+        return GUIInstance;
+    }
+
+    public void setGUIInstance(IGUIInstance GUIInstance) {
+        this.GUIInstance = GUIInstance;
     }
 }

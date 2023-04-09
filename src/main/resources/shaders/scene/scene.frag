@@ -2,7 +2,7 @@
 
 in vec2 outTextureCoordinate;
 
-out vec4 fragColor;
+out vec4 fragmentColor;
 
 struct Material
 {
@@ -14,5 +14,5 @@ uniform Material material;
 
 void main()
 {
-    fragColor = texture(textureSampler, outTextureCoordinate) + material.diffuse;
+    fragmentColor = texture(textureSampler, outTextureCoordinate) + material.diffuse;
 }
