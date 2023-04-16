@@ -2,6 +2,7 @@ package com.krish.core.graphics;
 
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.system.MemoryStack;
 
@@ -24,7 +25,7 @@ public class Uniforms {
 
     /**
      * Create a new uniform and register it
-     * @param uniformName The name of the uniform (case sensitive)
+     * @param uniformName The name of the uniform (case-sensitive)
      */
     public void createUniform(String uniformName) {
         //Get the uniform location according to LWJGL
@@ -65,8 +66,16 @@ public class Uniforms {
         }
     }
 
+    public void setUniform(String uniformName, float value) {
+        glUniform1f(this.uniforms.get(uniformName), value);
+    }
+
     public void setUniform(String uniformName, Vector4f value) {
         glUniform4f(this.uniforms.get(uniformName), value.x, value.y, value.z, value.w);
+    }
+
+    public void setUniform(String uniformName, Vector3f value) {
+        glUniform3f(this.uniforms.get(uniformName), value.x, value.y, value.z);
     }
 
     public void setUniform(String uniformName, Vector2f value) {

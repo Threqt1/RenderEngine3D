@@ -3,6 +3,7 @@ package com.krish.core.scene;
 import com.krish.core.IGUIInstance;
 import com.krish.core.graphics.scene.Model;
 import com.krish.core.graphics.TextureCache;
+import com.krish.core.scene.lights.SceneLights;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +13,7 @@ public class Scene {
     private final Projection projection;
     private final TextureCache textureCache;
     private final Camera camera;
+    private SceneLights sceneLights;
     private IGUIInstance GUIInstance;
 
     /**
@@ -88,5 +90,13 @@ public class Scene {
 
     public void setGUIInstance(IGUIInstance GUIInstance) {
         this.GUIInstance = GUIInstance;
+    }
+
+    public SceneLights getSceneLights() {
+        return sceneLights;
+    }
+
+    public void setSceneLights(SceneLights sceneLights) {
+        this.sceneLights = sceneLights;
     }
 }

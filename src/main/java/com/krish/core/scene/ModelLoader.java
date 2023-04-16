@@ -53,7 +53,7 @@ public class ModelLoader {
         for (int i = 0; i < numMeshes; i++) {
             assert aiMeshes != null;
             AIMesh aiMesh = AIMesh.create(aiMeshes.get(i));
-            SceneMesh sceneMesh = processMesh(aiMesh);
+            SceneMesh mesh = processMesh(aiMesh);
             int materialIdx = aiMesh.mMaterialIndex();
             Material material;
             if (materialIdx >= 0 && materialIdx < materialList.size()) {
@@ -61,7 +61,7 @@ public class ModelLoader {
             } else {
                 material = defaultMaterial;
             }
-            material.getMeshList().add(sceneMesh);
+            material.getMeshList().add(mesh);
         }
 
         if (!defaultMaterial.getMeshList().isEmpty()) {
@@ -90,11 +90,32 @@ public class ModelLoader {
         try (MemoryStack stack = MemoryStack.stackPush()) {
             AIColor4D color = AIColor4D.create();
 
-            int result = aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_DIFFUSE, aiTextureType_NONE, 0,
+            int result = aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_AMBIENT, aiTextureType_NONE, 0,
+                    color);
+            if (result == aiReturn_SUCCESS) {
+                material.setAmbientColor(new Vector4f(color.r(), color.g(), color.b(), color.a()));
+            }
+
+            result = aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_DIFFUSE, aiTextureType_NONE, 0,
                     color);
             if (result == aiReturn_SUCCESS) {
                 material.setDiffuseColor(new Vector4f(color.r(), color.g(), color.b(), color.a()));
             }
+
+            result = aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_SPECULAR, aiTextureType_NONE, 0,
+                    color);
+            if (result == aiReturn_SUCCESS) {
+                material.setSpecularColor(new Vector4f(color.r(), color.g(), color.b(), color.a()));
+            }
+
+            float reflectance = 0.0f;
+            float[] shininessFactor = new float[]{0.0f};
+            int[] pMax = new int[]{1};
+            result = aiGetMaterialFloatArray(aiMaterial, AI_MATKEY_SHININESS_STRENGTH, aiTextureType_NONE, 0, shininessFactor, pMax);
+            if (result != aiReturn_SUCCESS) {
+                reflectance = shininessFactor[0];
+            }
+            material.setReflectance(reflectance);
 
             AIString aiTexturePath = AIString.calloc(stack);
             aiGetMaterialTexture(aiMaterial, aiTextureType_DIFFUSE, 0, aiTexturePath, (IntBuffer) null,
@@ -112,6 +133,7 @@ public class ModelLoader {
 
     private static SceneMesh processMesh(AIMesh aiMesh) {
         float[] vertices = processVertices(aiMesh);
+        float[] normals = processNormals(aiMesh);
         float[] textCoords = processTextCoords(aiMesh);
         int[] indices = processIndices(aiMesh);
 
@@ -121,7 +143,21 @@ public class ModelLoader {
             textCoords = new float[numElements];
         }
 
-        return new SceneMesh(vertices, textCoords, indices);
+        return new SceneMesh(vertices, normals, textCoords, indices);
+    }
+
+    private static float[] processNormals(AIMesh aiMesh) {
+        AIVector3D.Buffer buffer = aiMesh.mNormals();
+        assert buffer != null;
+        float[] data = new float[buffer.remaining() * 3];
+        int pos = 0;
+        while (buffer.remaining() > 0) {
+            AIVector3D normal = buffer.get();
+            data[pos++] = normal.x();
+            data[pos++] = normal.y();
+            data[pos++] = normal.z();
+        }
+        return data;
     }
 
     private static float[] processTextCoords(AIMesh aiMesh) {

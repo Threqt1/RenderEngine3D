@@ -7,10 +7,13 @@ import com.krish.core.scene.Camera;
 import com.krish.core.scene.Entity;
 import com.krish.core.scene.ModelLoader;
 import com.krish.core.scene.Scene;
+import com.krish.core.scene.lights.PointLight;
+import com.krish.core.scene.lights.SceneLights;
 import org.joml.Vector2f;
 
 import imgui.*;
 import imgui.flag.ImGuiCond;
+import org.joml.Vector3f;
 
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
@@ -66,6 +69,13 @@ public class Game implements IGameLogic, IGUIInstance {
         cube = new Entity("cube-entity", cubeModel.getId());
         cube.setPosition(0, 0, -2);
         scene.addEntity(cube);
+
+        SceneLights sceneLights = new SceneLights();
+        scene.setSceneLights(sceneLights);
+
+        sceneLights.getAmbientLight().setIntensity(0.3f);
+        sceneLights.getPointLights().add(new PointLight(new Vector3f(1, 1, 1),
+                new Vector3f(0, 0, -1.4f), 1.0f));
 
         scene.setGUIInstance(this);
     }

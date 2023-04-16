@@ -4,28 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37584d7a-2321-4dea-bedc-6895f7b8a677" name="Changes" comment="Added ImGUI (for future GUI)">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/IGUIInstance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/gui/GUIMesh.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/gui/GUIRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/gui/gui.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/gui/gui.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="37584d7a-2321-4dea-bedc-6895f7b8a677" name="Changes" comment="Added basic point light + ambient light">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/lights/AmbientLight.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/lights/PointLight.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/lights/SceneLights.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/Engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/Material.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/SceneMesh.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Renderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/SceneRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/SceneRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Uniforms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Uniforms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/Material.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/SceneMesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/SceneMesh.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/SceneRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/SceneRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/ModelLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/ModelLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Scene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/test/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/test/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/scene.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/scene/scene.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/scene.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/scene/scene.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/scene/scene.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/scene/scene.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/scene/scene.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/scene/scene.vert" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,13 +29,30 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="renderengine3d" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="vs-template" />
         <option value="fs-template" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -188,7 +197,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680747133778</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added ImGUI (for future GUI)">
+      <created>1681055307303</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1681055307303</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -212,6 +228,7 @@
     <MESSAGE value="Added scroll movement, comments tomorrow" />
     <MESSAGE value="Loading OBJ file support" />
     <MESSAGE value="Added ImGUI (for future GUI)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added ImGUI (for future GUI)" />
+    <MESSAGE value="Added basic point light + ambient light" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added basic point light + ambient light" />
   </component>
 </project>
