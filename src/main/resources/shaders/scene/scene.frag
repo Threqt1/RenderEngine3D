@@ -42,11 +42,18 @@ struct DirectionLight {
     float intensity;
 };
 
+struct SpotLight {
+    PointLight pl;
+    vec3 conedirection;
+    float cutoff;
+};
+
 uniform sampler2D textureSampler;
 uniform Material material;
 uniform AmbientLight ambientLight;
 uniform DirectionLight directionLight;
 uniform PointLight pointLights[MAX_POINT_LIGHTS];
+uniform SpotLight spotLights[MAX_SPOT_LIGHTS];
 
 vec4 calculateAmbient(AmbientLight ambientLight, vec4 ambient) {
     return vec4(ambientLight.factor * ambientLight.color, 1) * ambient;
@@ -80,6 +87,22 @@ vec4 calculateDirectionLight(vec4 diffuse, vec4 specular, DirectionLight light, 
     return calculateLightColor(diffuse, specular, light.color, light.intensity, position, normalize(light.direction), normal);
 }
 
+vec4 calculateSpotLight(vec4 diffuse, vec4 specular, SpotLight light, vec3 position, vec3 normal) {
+    vec3 lightDirection = light.pl.position - position;
+    vec3 toLightDirection = normalize(lightDirection);
+    vec3 fromLightDirection = -toLightDirection;
+    float spot_alfa = dot(fromLightDirection, normalize(light.conedirection));
+
+    vec4 color = vec4(0, 0, 0, 0);
+
+    if (spot_alfa > light.cutoff) {
+        color = calculatePointLight(diffuse, specular, light.pl, position, normal);
+        color *= (1.0 - (1.0 - spot_alfa)/(1.0 - light.cutoff));
+    }
+
+    return color;
+}
+
 void main()
 {
     vec4 textureColor = texture(textureSampler, outTextureCoordinate) + material.diffuse;
@@ -92,6 +115,12 @@ void main()
     for (int i = 0; i < MAX_POINT_LIGHTS; i++) {
         if (pointLights[i].intensity > 0) {
             diffuseSpecularComposition += calculatePointLight(diffuseColor, specularColor, pointLights[i], outPosition, outNormal);
+        }
+    }
+
+    for (int i = 0; i < MAX_SPOT_LIGHTS; i++) {
+        if (spotLights[i].pl.intensity > 0) {
+            diffuseSpecularComposition += calculateSpotLight(diffuseColor, specularColor, spotLights[i], outPosition, outNormal);
         }
     }
 

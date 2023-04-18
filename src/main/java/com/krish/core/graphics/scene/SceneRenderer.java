@@ -3,10 +3,7 @@ package com.krish.core.graphics.scene;
 import com.krish.core.graphics.*;
 import com.krish.core.scene.Entity;
 import com.krish.core.scene.Scene;
-import com.krish.core.scene.lights.AmbientLight;
-import com.krish.core.scene.lights.DirectionLight;
-import com.krish.core.scene.lights.PointLight;
-import com.krish.core.scene.lights.SceneLights;
+import com.krish.core.scene.lights.*;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -18,6 +15,7 @@ import java.util.List;
 import static org.lwjgl.opengl.GL30.*;
 
 public class SceneRenderer {
+    private static final int MAX_POINT_LIGHTS = 5;
     private static final int MAX_SPOT_LIGHTS = 5;
 
     private final ShaderManager shaderManager;
@@ -54,7 +52,7 @@ public class SceneRenderer {
         uniforms.createUniform("ambientLight.factor");
         uniforms.createUniform("ambientLight.color");
 
-        for (int i = 0; i < MAX_SPOT_LIGHTS; i++) {
+        for (int i = 0; i < MAX_POINT_LIGHTS; i++) {
             String name = "pointLights[" + i + "]";
             uniforms.createUniform(name + ".position");
             uniforms.createUniform(name + ".color");
@@ -62,6 +60,18 @@ public class SceneRenderer {
             uniforms.createUniform(name + ".att.constant");
             uniforms.createUniform(name + ".att.linear");
             uniforms.createUniform(name + ".att.exponent");
+        }
+
+        for (int i = 0; i < MAX_SPOT_LIGHTS; i++) {
+            String name = "spotLights[" + i + "]";
+            uniforms.createUniform(name + ".pl.position");
+            uniforms.createUniform(name + ".pl.color");
+            uniforms.createUniform(name + ".pl.intensity");
+            uniforms.createUniform(name + ".pl.att.constant");
+            uniforms.createUniform(name + ".pl.att.linear");
+            uniforms.createUniform(name + ".pl.att.exponent");
+            uniforms.createUniform(name + ".conedirection");
+            uniforms.createUniform(name + ".cutoff");
         }
 
         uniforms.createUniform("directionLight.color");
@@ -144,13 +154,24 @@ public class SceneRenderer {
 
         List<PointLight> pointLights = sceneLights.getPointLights();
         PointLight pointLight;
-        for (int i = 0; i < MAX_SPOT_LIGHTS; i++) {
+        for (int i = 0; i < MAX_POINT_LIGHTS; i++) {
             if (i < pointLights.size()) {
                 pointLight = pointLights.get(i);
             } else {
                 pointLight = null;
             }
             updatePointLight(pointLight, "pointLights[" + i + "]", viewMatrix);
+        }
+
+        List<SpotLight> spotLights = sceneLights.getSpotLights();
+        SpotLight spotLight;
+        for (int i = 0; i < MAX_SPOT_LIGHTS; i++) {
+            if (i < spotLights.size()) {
+                spotLight = spotLights.get(i);
+            } else {
+                spotLight = null;
+            }
+            updateSpotLight(spotLight, "spotLights[" + i + "]", viewMatrix);
         }
     }
 
@@ -181,5 +202,20 @@ public class SceneRenderer {
         uniforms.setUniform(prefix + ".att.constant", constant);
         uniforms.setUniform(prefix + ".att.linear", linear);
         uniforms.setUniform(prefix + ".att.exponent", exponent);
+    }
+
+    private void updateSpotLight(SpotLight spotLight, String prefix, Matrix4f viewMatrix) {
+        PointLight pointLight = null;
+        Vector3f coneDirection = new Vector3f();
+        float cutoff = 0.0f;
+        if (spotLight != null) {
+            coneDirection = spotLight.getConeDirection();
+            cutoff = spotLight.getCutoff();
+            pointLight = spotLight.getPointLight();
+        }
+
+        uniforms.setUniform(prefix + ".conedirection", coneDirection);
+        uniforms.setUniform(prefix + ".cutoff", cutoff);
+        updatePointLight(pointLight, prefix + ".pl", viewMatrix);
     }
 }

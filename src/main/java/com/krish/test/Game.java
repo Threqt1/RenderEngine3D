@@ -9,6 +9,7 @@ import com.krish.core.scene.ModelLoader;
 import com.krish.core.scene.Scene;
 import com.krish.core.scene.lights.PointLight;
 import com.krish.core.scene.lights.SceneLights;
+import com.krish.core.scene.lights.SpotLight;
 import org.joml.Vector2f;
 
 import imgui.*;
@@ -74,8 +75,12 @@ public class Game implements IGameLogic, IGUIInstance {
         scene.setSceneLights(sceneLights);
 
         sceneLights.getAmbientLight().setIntensity(0.3f);
-        sceneLights.getPointLights().add(new PointLight(new Vector3f(1, 1, 1),
+        sceneLights.getPointLights().add(new PointLight(new Vector3f(1, 0, 0),
                 new Vector3f(0, 0, -1.4f), 1.0f));
+
+        Vector3f coneDir = new Vector3f(0, 0, -1);
+        sceneLights.getSpotLights().add(new SpotLight(new PointLight(new Vector3f(0, 1, 1),
+                new Vector3f(0, 0, -1.4f), 1.0f), coneDir, 140.0f));
 
         scene.setGUIInstance(this);
     }

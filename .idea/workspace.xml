@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37584d7a-2321-4dea-bedc-6895f7b8a677" name="Changes" comment="Added basic point light + ambient light">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/lights/DirectionLight.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/lights/SpotLight.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/SceneRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/SceneRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/lights/SceneLights.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/lights/SceneLights.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/test/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/test/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/scene/scene.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/scene/scene.frag" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
