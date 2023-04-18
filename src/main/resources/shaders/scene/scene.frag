@@ -36,9 +36,16 @@ struct PointLight {
     Attenuation att;
 };
 
+struct DirectionLight {
+    vec3 color;
+    vec3 direction;
+    float intensity;
+};
+
 uniform sampler2D textureSampler;
 uniform Material material;
 uniform AmbientLight ambientLight;
+uniform DirectionLight directionLight;
 uniform PointLight pointLights[MAX_POINT_LIGHTS];
 
 vec4 calculateAmbient(AmbientLight ambientLight, vec4 ambient) {
@@ -69,6 +76,10 @@ vec4 calculatePointLight(vec4 diffuse, vec4 specular, PointLight light, vec3 pos
     return lightColor / attentuationInverse;
 }
 
+vec4 calculateDirectionLight(vec4 diffuse, vec4 specular, DirectionLight light, vec3 position, vec3 normal) {
+    return calculateLightColor(diffuse, specular, light.color, light.intensity, position, normalize(light.direction), normal);
+}
+
 void main()
 {
     vec4 textureColor = texture(textureSampler, outTextureCoordinate) + material.diffuse;
@@ -76,7 +87,7 @@ void main()
     vec4 diffuseColor = textureColor + material.diffuse;
     vec4 specularColor = textureColor + material.specular;
 
-    vec4 diffuseSpecularComposition = vec4(0, 0, 0, 0);
+    vec4 diffuseSpecularComposition = calculateDirectionLight(diffuseColor, specularColor, directionLight, outPosition, outNormal);
 
     for (int i = 0; i < MAX_POINT_LIGHTS; i++) {
         if (pointLights[i].intensity > 0) {

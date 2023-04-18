@@ -4,6 +4,7 @@ import com.krish.core.graphics.*;
 import com.krish.core.scene.Entity;
 import com.krish.core.scene.Scene;
 import com.krish.core.scene.lights.AmbientLight;
+import com.krish.core.scene.lights.DirectionLight;
 import com.krish.core.scene.lights.PointLight;
 import com.krish.core.scene.lights.SceneLights;
 import org.joml.Matrix4f;
@@ -62,6 +63,10 @@ public class SceneRenderer {
             uniforms.createUniform(name + ".att.linear");
             uniforms.createUniform(name + ".att.exponent");
         }
+
+        uniforms.createUniform("directionLight.color");
+        uniforms.createUniform("directionLight.direction");
+        uniforms.createUniform("directionLight.intensity");
     }
 
     /**
@@ -130,6 +135,12 @@ public class SceneRenderer {
         AmbientLight ambientLight = sceneLights.getAmbientLight();
         uniforms.setUniform("ambientLight.factor", ambientLight.getIntensity());
         uniforms.setUniform("ambientLight.color", ambientLight.getColor());
+
+        DirectionLight directionLight = sceneLights.getDirectionLight();
+        Vector4f temporary = new Vector4f(directionLight.getDirection(), 0).mul(viewMatrix);
+        uniforms.setUniform("directionLight.color", directionLight.getColor());
+        uniforms.setUniform("directionLight.direction", new Vector3f(temporary.x, temporary.y, temporary.z));
+        uniforms.setUniform("directionLight.intensity", directionLight.getIntensity());
 
         List<PointLight> pointLights = sceneLights.getPointLights();
         PointLight pointLight;
