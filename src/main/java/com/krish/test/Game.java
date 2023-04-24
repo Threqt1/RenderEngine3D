@@ -10,6 +10,7 @@ import com.krish.core.scene.Scene;
 import com.krish.core.scene.lights.PointLight;
 import com.krish.core.scene.lights.SceneLights;
 import com.krish.core.scene.lights.SpotLight;
+import com.krish.test.controls.Lights;
 import org.joml.Vector2f;
 
 import imgui.*;
@@ -22,12 +23,13 @@ import java.util.Objects;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-public class Game implements IGameLogic, IGUIInstance {
+public class Game implements IGameLogic {
     private static final float MOUSE_SENSITIVITY = .1f;
     private static final float SCROLL_SENSITIVITY = 2;
     private static final float MOVEMENT_SPEED = 0.005f;
     private Entity cube;
     private float rotation;
+    private Lights lightsControls;
 
     public static void main(String[] args) throws URISyntaxException {
         Game game = new Game();
@@ -38,27 +40,6 @@ public class Game implements IGameLogic, IGUIInstance {
     @Override
     public void cleanup() {
 
-    }
-
-    @Override
-    public void drawGUI() {
-        ImGui.newFrame();
-        ImGui.setNextWindowPos(0, 0, ImGuiCond.Always);
-        ImGui.showDemoWindow();
-        ImGui.endFrame();
-        ImGui.render();
-    }
-
-    @Override
-    public boolean isGUIInput(Scene scene, Window window) {
-        ImGuiIO imGuiIO = ImGui.getIO();
-        MouseInput mouseInput = window.getMouseInput();
-        Vector2f mousePos = mouseInput.getCurrentPosition();
-        imGuiIO.setMousePos(mousePos.x, mousePos.y);
-        imGuiIO.setMouseDown(0, mouseInput.isLeftButtonPressed());
-        imGuiIO.setMouseDown(1, mouseInput.isRightButtonPressed());
-
-        return imGuiIO.getWantCaptureMouse() || imGuiIO.getWantCaptureKeyboard();
     }
 
     @Override
@@ -82,7 +63,8 @@ public class Game implements IGameLogic, IGUIInstance {
         sceneLights.getSpotLights().add(new SpotLight(new PointLight(new Vector3f(0, 1, 1),
                 new Vector3f(0, 0, -1.4f), 1.0f), coneDir, 140.0f));
 
-        scene.setGUIInstance(this);
+        lightsControls = new Lights(scene);
+        scene.setGUIInstance(lightsControls);
     }
 
     @Override

@@ -4,9 +4,9 @@ import org.joml.Vector3f;
 
 public class PointLight {
     private final Attenuation attenuation;
-    private final Vector3f color;
-    private final float intensity;
-    private final Vector3f position;
+    private Vector3f color;
+    private float intensity;
+    private Vector3f position;
 
     public PointLight(Vector3f color, Vector3f position, float intensity) {
         this.attenuation = new Attenuation(0, 0, 1);
@@ -31,6 +31,18 @@ public class PointLight {
         return position;
     }
 
+    public void setColor(float r, float g, float b) {
+        this.color = new Vector3f(r, g, b);
+    }
+
+    public void setIntensity(float intensity) {
+        this.intensity = intensity;
+    }
+
+    public void setPosition(float x, float y, float z) {
+        this.position = new Vector3f(x, y, z);
+    }
+
     public static class Attenuation {
         private final float constant;
         private final float exponent;
@@ -53,6 +65,5 @@ public class PointLight {
         public float getLinear() {
             return linear;
         }
-
     }
 }

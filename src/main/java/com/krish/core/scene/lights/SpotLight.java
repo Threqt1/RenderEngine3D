@@ -27,8 +27,8 @@ public class SpotLight {
         return coneDirection;
     }
 
-    public void setConeDirection(Vector3f coneDirection) {
-        this.coneDirection = coneDirection;
+    public void setConeDirection(float x, float y, float z) {
+        this.coneDirection = new Vector3f(x, y, z);
     }
 
     public float getCutoff() {

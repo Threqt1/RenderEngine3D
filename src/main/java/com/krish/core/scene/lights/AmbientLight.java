@@ -3,7 +3,7 @@ package com.krish.core.scene.lights;
 import org.joml.Vector3f;
 
 public class AmbientLight {
-    private final Vector3f color;
+    private Vector3f color;
     private float intensity;
 
     public AmbientLight(Vector3f color, float intensity) {
@@ -25,5 +25,9 @@ public class AmbientLight {
 
     public void setIntensity(float intensity) {
         this.intensity = intensity;
+    }
+
+    public void setColor(float r, float g, float b) {
+        this.color = new Vector3f(r, g, b);
     }
 }
