@@ -1,9 +1,13 @@
-package com.krish.core.scene;
+package com.krish.core.scene.scene;
 
 import com.krish.core.IGUIInstance;
-import com.krish.core.graphics.scene.Model;
+import com.krish.core.graphics.Model;
 import com.krish.core.graphics.TextureCache;
+import com.krish.core.scene.Camera;
+import com.krish.core.scene.Entity;
+import com.krish.core.scene.Projection;
 import com.krish.core.scene.lights.SceneLights;
+import com.krish.core.scene.skybox.Skybox;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +18,7 @@ public class Scene {
     private final TextureCache textureCache;
     private final Camera camera;
     private SceneLights sceneLights;
+    private Skybox skybox;
     private IGUIInstance GUIInstance;
 
     /**
@@ -98,5 +103,13 @@ public class Scene {
 
     public void setSceneLights(SceneLights sceneLights) {
         this.sceneLights = sceneLights;
+    }
+
+    public Skybox getSkybox() {
+        return skybox;
+    }
+
+    public void setSkybox(Skybox skybox) {
+        this.skybox = skybox;
     }
 }

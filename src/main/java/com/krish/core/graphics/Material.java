@@ -1,4 +1,4 @@
-package com.krish.core.graphics.scene;
+package com.krish.core.graphics;
 
 import org.joml.Vector4f;
 
@@ -8,7 +8,7 @@ import java.util.List;
 public class Material {
     public static final Vector4f DEFAULT_COLOR = new Vector4f(0.0f, 0.0f, 0.0f, 1.0f);
 
-    private final List<SceneMesh> sceneMeshList;
+    private final List<Mesh> meshList;
     private String texturePath;
 
     private Vector4f ambientColor;
@@ -23,18 +23,18 @@ public class Material {
         ambientColor = DEFAULT_COLOR;
         diffuseColor = DEFAULT_COLOR;
         specularColor = DEFAULT_COLOR;
-        sceneMeshList = new ArrayList<>();
+        meshList = new ArrayList<>();
     }
 
     /**
      * Cleanup the material
      */
     public void cleanup() {
-        sceneMeshList.forEach(SceneMesh::cleanup);
+        meshList.forEach(Mesh::cleanup);
     }
 
-    public List<SceneMesh> getMeshList() {
-        return sceneMeshList;
+    public List<Mesh> getMeshList() {
+        return meshList;
     }
 
     public String getTexturePath() {

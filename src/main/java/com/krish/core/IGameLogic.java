@@ -1,7 +1,7 @@
 package com.krish.core;
 
 import com.krish.core.graphics.Renderer;
-import com.krish.core.scene.Scene;
+import com.krish.core.scene.scene.Scene;
 
 import java.net.URISyntaxException;
 

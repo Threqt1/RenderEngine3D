@@ -1,7 +1,7 @@
 package com.krish.core.graphics.gui;
 
 import com.krish.core.IGUIInstance;
-import com.krish.core.scene.Scene;
+import com.krish.core.scene.scene.Scene;
 import imgui.*;
 import com.krish.core.Window;
 import com.krish.core.graphics.ShaderManager;

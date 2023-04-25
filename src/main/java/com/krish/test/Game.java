@@ -1,20 +1,19 @@
 package com.krish.test;
 
 import com.krish.core.*;
-import com.krish.core.graphics.scene.Model;
+import com.krish.core.graphics.Model;
 import com.krish.core.graphics.Renderer;
 import com.krish.core.scene.Camera;
 import com.krish.core.scene.Entity;
 import com.krish.core.scene.ModelLoader;
-import com.krish.core.scene.Scene;
+import com.krish.core.scene.scene.Scene;
 import com.krish.core.scene.lights.PointLight;
 import com.krish.core.scene.lights.SceneLights;
 import com.krish.core.scene.lights.SpotLight;
+import com.krish.core.scene.skybox.Skybox;
 import com.krish.test.controls.Lights;
 import org.joml.Vector2f;
 
-import imgui.*;
-import imgui.flag.ImGuiCond;
 import org.joml.Vector3f;
 
 import java.net.URISyntaxException;
@@ -53,7 +52,6 @@ public class Game implements IGameLogic {
         scene.addEntity(cube);
 
         SceneLights sceneLights = new SceneLights();
-        scene.setSceneLights(sceneLights);
 
         sceneLights.getAmbientLight().setIntensity(0.3f);
         sceneLights.getPointLights().add(new PointLight(new Vector3f(1, 0, 0),
@@ -63,8 +61,14 @@ public class Game implements IGameLogic {
         sceneLights.getSpotLights().add(new SpotLight(new PointLight(new Vector3f(0, 1, 1),
                 new Vector3f(0, 0, -1.4f), 1.0f), coneDir, 140.0f));
 
+        scene.setSceneLights(sceneLights);
+
         lightsControls = new Lights(scene);
         scene.setGUIInstance(lightsControls);
+
+        Skybox skybox = new Skybox(Paths.get(Objects.requireNonNull(getClass().getResource("/models/skybox/skybox.obj")).toURI()).toAbsolutePath().toString(), scene.getTextureCache());
+        skybox.getSkyboxEntity().setScale(50);
+        scene.setSkybox(skybox);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.krish.core.graphics.scene;
+package com.krish.core.graphics;
 
 import com.krish.core.scene.Entity;
 

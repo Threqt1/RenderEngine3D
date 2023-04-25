@@ -2,7 +2,7 @@ package com.krish.core.graphics.scene;
 
 import com.krish.core.graphics.*;
 import com.krish.core.scene.Entity;
-import com.krish.core.scene.Scene;
+import com.krish.core.scene.scene.Scene;
 import com.krish.core.scene.lights.*;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
@@ -121,11 +121,11 @@ public class SceneRenderer {
                 texture.bind();
 
                 //Use texture with all meshes (and entities associated)
-                for (SceneMesh sceneMesh : material.getMeshList()) {
-                    glBindVertexArray(sceneMesh.getVaoId());
+                for (Mesh mesh : material.getMeshList()) {
+                    glBindVertexArray(mesh.getVaoId());
                     for (Entity entity : entities) {
                         uniforms.setUniform("modelMatrix", entity.getModelMatrix());
-                        glDrawElements(GL_TRIANGLES, sceneMesh.getVertices(), GL_UNSIGNED_INT, 0);
+                        glDrawElements(GL_TRIANGLES, mesh.getVertices(), GL_UNSIGNED_INT, 0);
                     }
                 }
             }

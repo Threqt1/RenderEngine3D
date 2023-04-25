@@ -8,7 +8,7 @@ import imgui.ImGuiIO;
 import imgui.flag.ImGuiCond;
 import org.joml.*;
 
-import com.krish.core.scene.Scene;
+import com.krish.core.scene.scene.Scene;
 import com.krish.core.scene.lights.*;
 
 public class Lights implements IGUIInstance {

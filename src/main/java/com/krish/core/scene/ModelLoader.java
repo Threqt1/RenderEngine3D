@@ -1,8 +1,8 @@
 package com.krish.core.scene;
 
-import com.krish.core.graphics.scene.Material;
-import com.krish.core.graphics.scene.SceneMesh;
-import com.krish.core.graphics.scene.Model;
+import com.krish.core.graphics.Material;
+import com.krish.core.graphics.Mesh;
+import com.krish.core.graphics.Model;
 import com.krish.core.graphics.TextureCache;
 import org.joml.Vector4f;
 import org.lwjgl.PointerBuffer;
@@ -53,7 +53,7 @@ public class ModelLoader {
         for (int i = 0; i < numMeshes; i++) {
             assert aiMeshes != null;
             AIMesh aiMesh = AIMesh.create(aiMeshes.get(i));
-            SceneMesh mesh = processMesh(aiMesh);
+            Mesh mesh = processMesh(aiMesh);
             int materialIdx = aiMesh.mMaterialIndex();
             Material material;
             if (materialIdx >= 0 && materialIdx < materialList.size()) {
@@ -131,7 +131,7 @@ public class ModelLoader {
         }
     }
 
-    private static SceneMesh processMesh(AIMesh aiMesh) {
+    private static Mesh processMesh(AIMesh aiMesh) {
         float[] vertices = processVertices(aiMesh);
         float[] normals = processNormals(aiMesh);
         float[] textCoords = processTextCoords(aiMesh);
@@ -143,7 +143,7 @@ public class ModelLoader {
             textCoords = new float[numElements];
         }
 
-        return new SceneMesh(vertices, normals, textCoords, indices);
+        return new Mesh(vertices, normals, textCoords, indices);
     }
 
     private static float[] processNormals(AIMesh aiMesh) {
