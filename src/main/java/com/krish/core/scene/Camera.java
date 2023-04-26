@@ -82,13 +82,7 @@ public class Camera {
         return viewMatrix;
     }
 
-    public void setPosition(float x, float y, float z) {
-        position.set(x, y, z);
-        recalculate();
-    }
-
-    public void setRotation(float x, float y) {
-        rotation.set(x, y);
-        recalculate();
+    public Vector3f getPosition() {
+        return position;
     }
 }

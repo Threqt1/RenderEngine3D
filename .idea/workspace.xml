@@ -4,28 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37584d7a-2321-4dea-bedc-6895f7b8a677" name="Changes" comment="Added direction light">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/skybox/SkyboxRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/skybox/Skybox.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/models/skybox/skybox.mtl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/models/skybox/skybox.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/models/skybox/skybox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/skybox/skybox.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/skybox/skybox.vert" afterDir="false" />
+    <list default="true" id="37584d7a-2321-4dea-bedc-6895f7b8a677" name="Changes" comment="add broken skybox">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/models/quad/quad.mtl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/models/quad/quad.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/models/quad/quad.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/Engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/IGUIInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/IGUIInstance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/IGameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/IGameLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Renderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/gui/GUIRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/gui/GUIRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Material.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/SceneMesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/Mesh.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/SceneRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/graphics/scene/SceneRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/ModelLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/ModelLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/scene/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/core/scene/Camera.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/test/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/test/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/krish/test/controls/Lights.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/krish/test/controls/Lights.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,18 +77,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/Projects/Java/Projects/renderengine3d/src/main/resources/models",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/Java/Projects/renderengine3d/src/main/resources/models&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Projects\Java\Projects\renderengine3d\src\main\resources\models" />
@@ -220,7 +205,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681682311842</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="add broken skybox">
+      <created>1682391110081</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1682391110081</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -245,6 +237,7 @@
     <MESSAGE value="Loading OBJ file support" />
     <MESSAGE value="Added ImGUI (for future GUI)" />
     <MESSAGE value="Added basic point light + ambient light" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added basic point light + ambient light" />
+    <MESSAGE value="add broken skybox" />
+    <option name="LAST_COMMIT_MESSAGE" value="add broken skybox" />
   </component>
 </project>

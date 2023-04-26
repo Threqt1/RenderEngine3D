@@ -26,9 +26,9 @@ public class Game implements IGameLogic {
     private static final float MOUSE_SENSITIVITY = .1f;
     private static final float SCROLL_SENSITIVITY = 2;
     private static final float MOVEMENT_SPEED = 0.005f;
-    private Entity cube;
-    private float rotation;
     private Lights lightsControls;
+    private static final int NUM_CHUNKS = 4;
+    private Entity[][] terrainEntities;
 
     public static void main(String[] args) throws URISyntaxException {
         Game game = new Game();
@@ -43,13 +43,19 @@ public class Game implements IGameLogic {
 
     @Override
     public void init(Window window, Scene scene, Renderer renderer) throws URISyntaxException {
-        Model cubeModel = ModelLoader.loadModel("cube-model", Paths.get(Objects.requireNonNull(getClass().getResource("/models/cube/cube.obj")).toURI()).toAbsolutePath().toString(),
+        Model quadModel = ModelLoader.loadModel("quad-model", Paths.get(Objects.requireNonNull(getClass().getResource("/models/quad/quad.obj")).toURI()).toAbsolutePath().toString(),
                 scene.getTextureCache());
-        scene.addModel(cubeModel);
+        scene.addModel(quadModel);
 
-        cube = new Entity("cube-entity", cubeModel.getId());
-        cube.setPosition(0, 0, -2);
-        scene.addEntity(cube);
+        int numberOfRows = NUM_CHUNKS * 2 + 1;
+        terrainEntities = new Entity[numberOfRows][numberOfRows];
+        for (int row = 0; row < numberOfRows; row++) {
+            for (int column = 0; column < numberOfRows; column++) {
+                Entity entity = new Entity("TERRAIN_" + row + "_" + column, quadModel.getId());
+                terrainEntities[row][column] = entity;
+                scene.addEntity(entity);
+            }
+        }
 
         SceneLights sceneLights = new SceneLights();
 
@@ -69,6 +75,10 @@ public class Game implements IGameLogic {
         Skybox skybox = new Skybox(Paths.get(Objects.requireNonNull(getClass().getResource("/models/skybox/skybox.obj")).toURI()).toAbsolutePath().toString(), scene.getTextureCache());
         skybox.getSkyboxEntity().setScale(50);
         scene.setSkybox(skybox);
+
+        scene.getCamera().moveUp(0.1f);
+
+        updateTerrain(scene);
     }
 
     @Override
@@ -105,13 +115,29 @@ public class Game implements IGameLogic {
 
     @Override
     public void update(Window window, Scene scene, long diffTimeMillis) {
-        rotation += 1.5;
-        if (rotation > 360) {
-            rotation = 0;
-        }
-        this.cube.setRotation(1, 1, 1, (float) Math.toRadians(rotation));
-        this.cube.updateModelMatrix();
+        updateTerrain(scene);
     }
 
+    public void updateTerrain(Scene scene) {
+        int cellSize = 10;
+        Camera camera = scene.getCamera();
+        Vector3f cameraPosition = camera.getPosition();
+        int cellCol = (int) (cameraPosition.x() / cellSize);
+        int cellRow = (int) (cameraPosition.z() / cellSize);
 
+        int numberOfRows = NUM_CHUNKS * 2 + 1;
+        int zOffset = -NUM_CHUNKS;
+        float scale = cellSize / 2.0f;
+        for (int row = 0; row < numberOfRows; row++) {
+            int xOffset = -NUM_CHUNKS;
+            for (int column = 0; column < numberOfRows; column++) {
+                Entity entity = terrainEntities[row][column];
+                entity.setScale(scale);
+                entity.setPosition((cellCol + xOffset) * 2.0f, 0, (cellRow + zOffset) * 2.0f);
+                entity.getModelMatrix().identity().scale(scale).translate(entity.getPosition());
+                xOffset++;
+            }
+            zOffset++;
+        }
+    }
 }
