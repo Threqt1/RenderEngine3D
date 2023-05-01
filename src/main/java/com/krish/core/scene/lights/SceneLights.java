@@ -12,7 +12,7 @@ public class SceneLights {
 
     public SceneLights() {
         this.ambientLight = new AmbientLight();
-        this.directionLight = new DirectionLight(new Vector3f(1, 1, 0), new Vector3f(0, 1, 0), 1.0f);
+        this.directionLight = new DirectionLight(new Vector3f(1, 1, 1), new Vector3f(0, 1, 0), 1.0f);
         this.pointLights = new ArrayList<>();
         this.spotLights = new ArrayList<>();
     }

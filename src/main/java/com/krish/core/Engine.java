@@ -92,9 +92,9 @@ public class Engine {
             //Handle inputs
             if (targetFPS <= 0 || deltaFPS >= 1) {
                 window.getMouseInput().input();
-                if (iGUIInstance != null && !iGUIInstance.isGUIInput(scene, window)) {
+                //if (iGUIInstance != null && !iGUIInstance.isGUIInput(scene, window)) {
                     gameLogic.input(window, scene, diff);
-                }
+                //}
             }
 
             //Update the game state as many times as needed

@@ -6,6 +6,7 @@ import com.krish.core.graphics.TextureCache;
 import com.krish.core.scene.Camera;
 import com.krish.core.scene.Entity;
 import com.krish.core.scene.Projection;
+import com.krish.core.scene.fog.Fog;
 import com.krish.core.scene.lights.SceneLights;
 import com.krish.core.scene.skybox.Skybox;
 
@@ -17,6 +18,7 @@ public class Scene {
     private final Projection projection;
     private final TextureCache textureCache;
     private final Camera camera;
+    private Fog fog;
     private SceneLights sceneLights;
     private Skybox skybox;
     private IGUIInstance GUIInstance;
@@ -32,6 +34,7 @@ public class Scene {
         projection = new Projection(width, height);
         textureCache = new TextureCache();
         camera = new Camera();
+        fog = new Fog();
     }
 
     //Add an entity to the scene
@@ -111,5 +114,13 @@ public class Scene {
 
     public void setSkybox(Skybox skybox) {
         this.skybox = skybox;
+    }
+
+    public Fog getFog() {
+        return fog;
+    }
+
+    public void setFog(Fog fog) {
+        this.fog = fog;
     }
 }

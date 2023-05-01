@@ -11,7 +11,7 @@ import static org.lwjgl.opengl.GL30.*;
 
 public class Renderer {
     private final SceneRenderer sceneRenderer;
-    private final GUIRenderer guiRenderer;
+    //private final GUIRenderer guiRenderer;
     private final SkyboxRenderer skyboxRenderer;
 
     /**
@@ -24,7 +24,7 @@ public class Renderer {
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
         this.sceneRenderer = new SceneRenderer();
-        this.guiRenderer = new GUIRenderer(window);
+        //this.guiRenderer = new GUIRenderer(window);
         this.skyboxRenderer = new SkyboxRenderer();
     }
 
@@ -32,7 +32,7 @@ public class Renderer {
      * Cleanup the renderer
      */
     public void cleanup() {
-        guiRenderer.cleanup();
+        //guiRenderer.cleanup();
         sceneRenderer.cleanup();
         skyboxRenderer.cleanup();
     }
@@ -43,10 +43,10 @@ public class Renderer {
 
         skyboxRenderer.render(scene);
         sceneRenderer.render(scene);
-        guiRenderer.render(scene);
+        //guiRenderer.render(scene);
     }
 
     public void resize(int width, int height) {
-        guiRenderer.resize(width, height);
+        //guiRenderer.resize(width, height);
     }
 }

@@ -2,6 +2,7 @@ package com.krish.core.graphics.scene;
 
 import com.krish.core.graphics.*;
 import com.krish.core.scene.Entity;
+import com.krish.core.scene.fog.Fog;
 import com.krish.core.scene.scene.Scene;
 import com.krish.core.scene.lights.*;
 import org.joml.Matrix4f;
@@ -77,6 +78,10 @@ public class SceneRenderer {
         uniforms.createUniform("directionLight.color");
         uniforms.createUniform("directionLight.direction");
         uniforms.createUniform("directionLight.intensity");
+
+        uniforms.createUniform("fog.active");
+        uniforms.createUniform("fog.color");
+        uniforms.createUniform("fog.density");
     }
 
     /**
@@ -91,6 +96,9 @@ public class SceneRenderer {
      * @param scene The scene to render
      */
     public void render(Scene scene) {
+        glEnable(GL_BLEND);
+        glBlendEquation(GL_FUNC_ADD);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         //Bind the shader manager to the program
         shaderManager.bind();
 
@@ -102,6 +110,11 @@ public class SceneRenderer {
         uniforms.setUniform("textureSampler", 0);
 
         updateLights(scene);
+
+        Fog fog = scene.getFog();
+        uniforms.setUniform("fog.active", fog.isActive() ? 1 : 0);
+        uniforms.setUniform("fog.color", fog.getColor());
+        uniforms.setUniform("fog.density", fog.getDensity());
 
         //Get all the models and go through their meshes
         Collection<Model> models = scene.getModelMap().values();
@@ -136,6 +149,7 @@ public class SceneRenderer {
 
         //Unbind shaders
         shaderManager.unbind();
+        glDisable(GL_BLEND);
     }
 
     private void updateLights(Scene scene) {

@@ -6,6 +6,8 @@ import com.krish.core.graphics.Renderer;
 import com.krish.core.scene.Camera;
 import com.krish.core.scene.Entity;
 import com.krish.core.scene.ModelLoader;
+import com.krish.core.scene.fog.Fog;
+import com.krish.core.scene.lights.DirectionLight;
 import com.krish.core.scene.scene.Scene;
 import com.krish.core.scene.lights.PointLight;
 import com.krish.core.scene.lights.SceneLights;
@@ -27,8 +29,6 @@ public class Game implements IGameLogic {
     private static final float SCROLL_SENSITIVITY = 2;
     private static final float MOVEMENT_SPEED = 0.005f;
     private Lights lightsControls;
-    private static final int NUM_CHUNKS = 4;
-    private Entity[][] terrainEntities;
 
     public static void main(String[] args) throws URISyntaxException {
         Game game = new Game();
@@ -43,42 +43,32 @@ public class Game implements IGameLogic {
 
     @Override
     public void init(Window window, Scene scene, Renderer renderer) throws URISyntaxException {
-        Model quadModel = ModelLoader.loadModel("quad-model", Paths.get(Objects.requireNonNull(getClass().getResource("/models/quad/quad.obj")).toURI()).toAbsolutePath().toString(),
+        Model quadModel = ModelLoader.loadModel("terrain-model", Paths.get(Objects.requireNonNull(getClass().getResource("/models/terrain/terrain.obj")).toURI()).toAbsolutePath().toString(),
                 scene.getTextureCache());
         scene.addModel(quadModel);
-
-        int numberOfRows = NUM_CHUNKS * 2 + 1;
-        terrainEntities = new Entity[numberOfRows][numberOfRows];
-        for (int row = 0; row < numberOfRows; row++) {
-            for (int column = 0; column < numberOfRows; column++) {
-                Entity entity = new Entity("TERRAIN_" + row + "_" + column, quadModel.getId());
-                terrainEntities[row][column] = entity;
-                scene.addEntity(entity);
-            }
-        }
+        Entity terrainEntity = new Entity("terrainEntity", quadModel.getId());
+        terrainEntity.setScale(100.0f);
+        terrainEntity.updateModelMatrix();
+        scene.addEntity(terrainEntity);
 
         SceneLights sceneLights = new SceneLights();
 
-        sceneLights.getAmbientLight().setIntensity(0.3f);
-        sceneLights.getPointLights().add(new PointLight(new Vector3f(1, 0, 0),
-                new Vector3f(0, 0, -1.4f), 1.0f));
+        sceneLights.getAmbientLight().setIntensity(0.5f);
+        sceneLights.getAmbientLight().setColor(0.3f, 0.3f, 0.3f);
 
-        Vector3f coneDir = new Vector3f(0, 0, -1);
-        sceneLights.getSpotLights().add(new SpotLight(new PointLight(new Vector3f(0, 1, 1),
-                new Vector3f(0, 0, -1.4f), 1.0f), coneDir, 140.0f));
+        DirectionLight directionLight = sceneLights.getDirectionLight();
+        directionLight.setDirection(0, 1, 0);
+        directionLight.setIntensity(1.0f);
 
         scene.setSceneLights(sceneLights);
 
-        lightsControls = new Lights(scene);
-        scene.setGUIInstance(lightsControls);
-
         Skybox skybox = new Skybox(Paths.get(Objects.requireNonNull(getClass().getResource("/models/skybox/skybox.obj")).toURI()).toAbsolutePath().toString(), scene.getTextureCache());
-        skybox.getSkyboxEntity().setScale(50);
+        skybox.getSkyboxEntity().setScale(500);
         scene.setSkybox(skybox);
 
-        scene.getCamera().moveUp(0.1f);
+        scene.setFog(new Fog(true, new Vector3f(0.5f, 0.5f, 0.5f), 0.95f));
 
-        updateTerrain(scene);
+        scene.getCamera().moveUp(0.1f);
     }
 
     @Override
@@ -115,29 +105,5 @@ public class Game implements IGameLogic {
 
     @Override
     public void update(Window window, Scene scene, long diffTimeMillis) {
-        updateTerrain(scene);
-    }
-
-    public void updateTerrain(Scene scene) {
-        int cellSize = 10;
-        Camera camera = scene.getCamera();
-        Vector3f cameraPosition = camera.getPosition();
-        int cellCol = (int) (cameraPosition.x() / cellSize);
-        int cellRow = (int) (cameraPosition.z() / cellSize);
-
-        int numberOfRows = NUM_CHUNKS * 2 + 1;
-        int zOffset = -NUM_CHUNKS;
-        float scale = cellSize / 2.0f;
-        for (int row = 0; row < numberOfRows; row++) {
-            int xOffset = -NUM_CHUNKS;
-            for (int column = 0; column < numberOfRows; column++) {
-                Entity entity = terrainEntities[row][column];
-                entity.setScale(scale);
-                entity.setPosition((cellCol + xOffset) * 2.0f, 0, (cellRow + zOffset) * 2.0f);
-                entity.getModelMatrix().identity().scale(scale).translate(entity.getPosition());
-                xOffset++;
-            }
-            zOffset++;
-        }
     }
 }
