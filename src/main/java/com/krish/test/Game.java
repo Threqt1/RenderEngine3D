@@ -1,21 +1,22 @@
 package com.krish.test;
 
-import com.krish.core.*;
+import com.krish.core.Engine;
+import com.krish.core.IGameLogic;
+import com.krish.core.MouseInput;
+import com.krish.core.Window;
 import com.krish.core.graphics.Model;
 import com.krish.core.graphics.Renderer;
 import com.krish.core.scene.Camera;
 import com.krish.core.scene.Entity;
 import com.krish.core.scene.ModelLoader;
 import com.krish.core.scene.fog.Fog;
+import com.krish.core.scene.lights.AmbientLight;
 import com.krish.core.scene.lights.DirectionLight;
-import com.krish.core.scene.scene.Scene;
-import com.krish.core.scene.lights.PointLight;
 import com.krish.core.scene.lights.SceneLights;
-import com.krish.core.scene.lights.SpotLight;
+import com.krish.core.scene.scene.Scene;
 import com.krish.core.scene.skybox.Skybox;
 import com.krish.test.controls.Lights;
 import org.joml.Vector2f;
-
 import org.joml.Vector3f;
 
 import java.net.URISyntaxException;
@@ -46,24 +47,25 @@ public class Game implements IGameLogic {
         Model quadModel = ModelLoader.loadModel("terrain-model", Paths.get(Objects.requireNonNull(getClass().getResource("/models/terrain/terrain.obj")).toURI()).toAbsolutePath().toString(),
                 scene.getTextureCache());
         scene.addModel(quadModel);
-        Entity terrainEntity = new Entity("terrainEntity", quadModel.getId());
+        Entity terrainEntity = new Entity("terrainEntity", "terrain-model");
         terrainEntity.setScale(100.0f);
         terrainEntity.updateModelMatrix();
         scene.addEntity(terrainEntity);
 
         SceneLights sceneLights = new SceneLights();
+        AmbientLight ambientLight = sceneLights.getAmbientLight();
 
-        sceneLights.getAmbientLight().setIntensity(0.5f);
-        sceneLights.getAmbientLight().setColor(0.3f, 0.3f, 0.3f);
+        ambientLight.setIntensity(0.5f);
+        ambientLight.setColor(0.3f, 0.3f, 0.3f);
 
         DirectionLight directionLight = sceneLights.getDirectionLight();
         directionLight.setDirection(0, 1, 0);
-        directionLight.setIntensity(1.0f);
+        directionLight.setIntensity(1f);
 
         scene.setSceneLights(sceneLights);
 
         Skybox skybox = new Skybox(Paths.get(Objects.requireNonNull(getClass().getResource("/models/skybox/skybox.obj")).toURI()).toAbsolutePath().toString(), scene.getTextureCache());
-        skybox.getSkyboxEntity().setScale(500);
+        skybox.getSkyboxEntity().setScale(50);
         scene.setSkybox(skybox);
 
         scene.setFog(new Fog(true, new Vector3f(0.5f, 0.5f, 0.5f), 0.95f));

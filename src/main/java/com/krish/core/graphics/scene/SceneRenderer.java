@@ -43,7 +43,7 @@ public class SceneRenderer {
         uniforms.createUniform("projectionMatrix");
         uniforms.createUniform("modelMatrix");
         uniforms.createUniform("viewMatrix");
-        uniforms.createUniform("textureSampler");
+        uniforms.createUniform("txtSampler");
 
         uniforms.createUniform("material.ambient");
         uniforms.createUniform("material.diffuse");
@@ -71,15 +71,15 @@ public class SceneRenderer {
             uniforms.createUniform(name + ".pl.att.constant");
             uniforms.createUniform(name + ".pl.att.linear");
             uniforms.createUniform(name + ".pl.att.exponent");
-            uniforms.createUniform(name + ".conedirection");
+            uniforms.createUniform(name + ".conedir");
             uniforms.createUniform(name + ".cutoff");
         }
 
-        uniforms.createUniform("directionLight.color");
-        uniforms.createUniform("directionLight.direction");
-        uniforms.createUniform("directionLight.intensity");
+        uniforms.createUniform("dirLight.color");
+        uniforms.createUniform("dirLight.direction");
+        uniforms.createUniform("dirLight.intensity");
 
-        uniforms.createUniform("fog.active");
+        uniforms.createUniform("fog.activeFog");
         uniforms.createUniform("fog.color");
         uniforms.createUniform("fog.density");
     }
@@ -107,12 +107,12 @@ public class SceneRenderer {
         uniforms.setUniform("viewMatrix", scene.getCamera().getViewMatrix());
 
         //Set texture sampler uniform
-        uniforms.setUniform("textureSampler", 0);
+        uniforms.setUniform("txtSampler", 0);
 
         updateLights(scene);
 
         Fog fog = scene.getFog();
-        uniforms.setUniform("fog.active", fog.isActive() ? 1 : 0);
+        uniforms.setUniform("fog.activeFog", fog.isActive() ? 1 : 0);
         uniforms.setUniform("fog.color", fog.getColor());
         uniforms.setUniform("fog.density", fog.getDensity());
 
@@ -157,14 +157,17 @@ public class SceneRenderer {
 
         SceneLights sceneLights = scene.getSceneLights();
         AmbientLight ambientLight = sceneLights.getAmbientLight();
+
         uniforms.setUniform("ambientLight.factor", ambientLight.getIntensity());
         uniforms.setUniform("ambientLight.color", ambientLight.getColor());
 
         DirectionLight directionLight = sceneLights.getDirectionLight();
-        Vector4f temporary = new Vector4f(directionLight.getDirection(), 0).mul(viewMatrix);
-        uniforms.setUniform("directionLight.color", directionLight.getColor());
-        uniforms.setUniform("directionLight.direction", new Vector3f(temporary.x, temporary.y, temporary.z));
-        uniforms.setUniform("directionLight.intensity", directionLight.getIntensity());
+        Vector4f temporary = new Vector4f(directionLight.getDirection(), 0);
+        temporary.mul(viewMatrix);
+        Vector3f dir = new Vector3f(temporary.x, temporary.y, temporary.z);
+        uniforms.setUniform("dirLight.color", directionLight.getColor());
+        uniforms.setUniform("dirLight.direction", dir);
+        uniforms.setUniform("dirLight.intensity", directionLight.getIntensity());
 
         List<PointLight> pointLights = sceneLights.getPointLights();
         PointLight pointLight;
@@ -228,7 +231,7 @@ public class SceneRenderer {
             pointLight = spotLight.getPointLight();
         }
 
-        uniforms.setUniform(prefix + ".conedirection", coneDirection);
+        uniforms.setUniform(prefix + ".conedir", coneDirection);
         uniforms.setUniform(prefix + ".cutoff", cutoff);
         updatePointLight(pointLight, prefix + ".pl", viewMatrix);
     }

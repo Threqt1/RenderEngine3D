@@ -43,7 +43,7 @@ public class ModelLoader {
         int numMaterials = aiScene.mNumMaterials();
         List<Material> materialList = new ArrayList<>();
         for (int i = 0; i < numMaterials; i++) {
-            AIMaterial aiMaterial = AIMaterial.create(Objects.requireNonNull(aiScene.mMaterials()).get(i));
+            AIMaterial aiMaterial = AIMaterial.create(aiScene.mMaterials().get(i));
             materialList.add(processMaterial(aiMaterial, modelDir, textureCache));
         }
 
@@ -51,7 +51,6 @@ public class ModelLoader {
         PointerBuffer aiMeshes = aiScene.mMeshes();
         Material defaultMaterial = new Material();
         for (int i = 0; i < numMeshes; i++) {
-            assert aiMeshes != null;
             AIMesh aiMesh = AIMesh.create(aiMeshes.get(i));
             Mesh mesh = processMesh(aiMesh);
             int materialIdx = aiMesh.mMaterialIndex();
@@ -121,7 +120,7 @@ public class ModelLoader {
             aiGetMaterialTexture(aiMaterial, aiTextureType_DIFFUSE, 0, aiTexturePath, (IntBuffer) null,
                     null, null, null, null, null);
             String texturePath = aiTexturePath.dataString();
-            if (texturePath.length() > 0) {
+            if (texturePath != null && texturePath.length() > 0) {
                 material.setTexturePath(modelDir + File.separator + new File(texturePath).getName());
                 textureCache.createTexture(material.getTexturePath());
                 material.setDiffuseColor(Material.DEFAULT_COLOR);
@@ -148,7 +147,6 @@ public class ModelLoader {
 
     private static float[] processNormals(AIMesh aiMesh) {
         AIVector3D.Buffer buffer = aiMesh.mNormals();
-        assert buffer != null;
         float[] data = new float[buffer.remaining() * 3];
         int pos = 0;
         while (buffer.remaining() > 0) {
